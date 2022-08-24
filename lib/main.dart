@@ -1,115 +1,99 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:test_tech/ui/offerts_screen.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'controller/offerts_controller.dart';
+import 'data/model/response/offerts_model.dart';
+import '../helper/get_di.dart' as di;
+
+void main() async {
+  await di.init();
+  runApp(MyApp());
+}
+/*
+class OffertScreen extends StatefulWidget {
+  const OffertScreen({Key? key}) : super(key: key);
+
+  @override
+  State<OffertScreen> createState() => _OffertScreenState();
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
+class _OffertScreenState extends State<OffertScreen> {
   // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
+  final json = '{ "data": [ { "id": 21835, "status": "waiting","start_at": "2022-02-28 17:00:00","end_at": "2022-03-01 01:30:00","post_name": "Server","post_id": 1,"start_soon": false,"recurring": null,"company": "Marroniers","buy_price": "22.00","bonus": 5,"latitude": 46.8139963,"longitude": -71.1796024},{       "id": 22201,"status": "waiting","start_at": "2022-02-28 21:00:00","end_at": "2022-03-01 06:30:00","post_name": "Food & Beverage Helper","post_id": 10,"start_soon": false,"recurring": {"id": 3067,"start_at": "2022-02-28 21:00:00","end_at": "2022-03-04 06:30:00","is_available": false},"company": "Les Produits Alimaison 2014 inc.","buy_price": "19.00","bonus": 2,"latitude": 46.857129,"longitude": -71.3390471},{"id": 22311,"status": "accepted","start_at": "2022-03-01 16:00:00","end_at": "2022-03-02 00:30:00","post_name": "Help-Cook","post_id": 4,"start_soon": false,"recurring": null,"company": "Manoir Manrèse groupe Cogir","buy_price": "20.00","bonus": 0,"latitude": 46.8027708,"longitude": -71.2403502},{"id": 22313,"status": "accepted","start_at": "2022-03-02 16:00:00","end_at": "2022-03-03 00:30:00","post_name": "Help-Cook","post_id": 4,"start_soon": false,"recurring": null,"company": "Manoir Manrèse groupe Cogir","buy_price": "20.00","bonus": 0,"latitude": 46.8027708,"longitude": -71.2403502},{"id": 22298,"status": "accepted","start_at": "2022-03-05 21:00:00","end_at": "2022-03-06 01:00:00","post_name": "Server","post_id": 1,"start_soon": false,"recurring": null,"company": "Pavillon Sekoia","buy_price": "22.00","bonus": 0,"latitude": 46.7922073,"longitude": -71.1830321},{"id": 21522,"status": "accepted","start_at": "2022-03-05 22:00:00","end_at": "2022-03-06 02:00:00","post_name": "Server","post_id": 1,"start_soon": false,"recurring": null,"company": "Chartwell Trait-Carré","buy_price": "22.00","bonus": 0,"latitude": 46.8745704,"longitude": -71.2521533},{"id": 22209,"status": "waiting","start_at": "2022-03-07 21:00:00","end_at": "2022-03-08 06:30:00","post_name": "Food & Beverage Helper","post_id": 10,"start_soon": false,"recurring": {"id": 3069,"start_at": "2022-03-07 21:00:00","end_at": "2022-03-11 06:30:00","is_available": true},"company": "Les Produits Alimaison 2014 inc.","buy_price": "19.00","bonus": 2,"latitude": 46.857129,"longitude": -71.3390471},{"id": 22213,"status": "accepted","start_at": "2022-03-07 21:00:00","end_at": "2022-03-08 06:30:00","post_name": "Food & Beverage Helper","post_id": 10,"start_soon": false,"recurring": {"id": 3070,"start_at": "2022-03-07 21:00:00","end_at": "2022-03-11 06:30:00","is_available": true},"company": "Les Produits Alimaison 2014 inc.","buy_price": "19.00","bonus": 2,"latitude": 46.857129,"longitude": -71.3390471},{"id": 22210,"status": "accepted","start_at": "2022-03-08 21:00:00","end_at": "2022-03-09 06:30:00","post_name": "Food & Beverage Helper","post_id": 10,"start_soon": false,"recurring": {"id": 3069,"start_at": "2022-03-07 21:00:00","end_at": "2022-03-11 06:30:00","is_available": true},"company": "Les Produits Alimaison 2014 inc.","buy_price": "19.00","bonus": 2,"latitude": 46.857129,"longitude": -71.3390471},{"id": 22214,"status": "waiting","start_at": "2022-03-08 21:00:00","end_at": "2022-03-09 06:30:00","post_name": "Food & Beverage Helper","post_id": 10,"start_soon": false,"recurring": {"id": 3070,"start_at": "2022-03-07 21:00:00","end_at": "2022-03-11 06:30:00","is_available": true},"company": "Les Produits Alimaison 2014 inc.","buy_price": "19.00","bonus": 2,"latitude": 46.857129,"longitude": -71.3390471}],"links": {"first": "https://api.goodjobapp.ca/api/v2/worker/shifts?status%5B0%5D=waiting&page=1","last": "https://api.goodjobapp.ca/api/v2/worker/shifts?status%5B0%5D=waiting&page=10","prev": null,"next": "https://api.goodjobapp.ca/api/v2/worker/shifts?status%5B0%5D=waiting&page=2"},"meta": {"current_page": 1,"from": 1,"last_page": 10,"path": "https://api.goodjobapp.ca/api/v2/worker/shifts","per_page": 10,"to": 10,"total": 92}}';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+  List<Data> listOfOfferts = [];
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
+  void initState() {
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+    final jsonToParsed = '$json';
+    listOfOfferts = Get.find<OffertsController>().getListOfferts(json)!;
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+      appBar: AppBar(title: const Text('GeeksforGeeks')),
+      body: const Center(
+        child: Text(
+          "Welcome to GeeksforGeeks!!!",
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 40.0,
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+    //   Scaffold(
+    //   appBar: null,
+    //   body: SingleChildScrollView(
+    //     child: Column(
+    //         children: [
+    //           ListView.builder(
+    //               itemCount: listOfOfferts.length,
+    //               itemBuilder: (BuildContext context, int index) {
+    //                 return ListTile(
+    //                     leading: const Icon(Icons.list),
+    //                     trailing: const Text(
+    //                       "GFG",
+    //                       style: TextStyle(color: Colors.green, fontSize: 15),
+    //                     ),
+    //                     title: Text("List item $index"));
+    //               }),
+    //           ListView.builder(
+    //               itemCount: 5,
+    //               itemBuilder: (BuildContext context, int index) {
+    //                 return ListTile(
+    //                     leading: const Icon(Icons.list),
+    //                     trailing: const Text(
+    //                       "GFG",
+    //                       style: TextStyle(color: Colors.green, fontSize: 15),
+    //                     ),
+    //                     title: Text("List item $index"));
+    //               }),
+    //         ]
+    //     ),
+    //   ),
+    // );
+  }*/
+
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+
+  @override
+  Widget build(BuildContext context) {
+
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: OffertScreen(),
     );
   }
 }
+
+//}
