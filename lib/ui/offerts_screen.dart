@@ -7,6 +7,7 @@ import 'package:test_tech/controller/offerts_controller.dart';
 import 'package:test_tech/util/dimensions.dart';
 
 import '../data/model/response/offerts_model.dart';
+import '../helper/route_helper.dart';
 import '../util/style.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
@@ -135,7 +136,11 @@ class _OffertScreenState extends State<OffertScreen> {
                 physics: const ClampingScrollPhysics(),
                 itemCount: listOfOffertsAccepted.length,
                 itemBuilder: (BuildContext context, int childIdx) {
-                  return Padding(
+                  return InkWell(
+                      onTap: () {
+                        Get.offNamed(RouteHelper.getDetailsOffertRoute(), arguments: listOfOffertsAccepted[childIdx]);
+                      },
+                      child: Padding(
                       padding: const EdgeInsets.only(
                           left: Dimensions.PADDING_SIZE_DEFAULT,
                           right: Dimensions.PADDING_SIZE_DEFAULT),
@@ -252,7 +257,7 @@ class _OffertScreenState extends State<OffertScreen> {
                             ),
                           ],
                         ),
-                      ));
+                      )));
                 },
               )),
           Padding(
@@ -276,7 +281,11 @@ class _OffertScreenState extends State<OffertScreen> {
                 physics: ClampingScrollPhysics(),
                 itemCount: listOfOffertsWaiting.length,
                 itemBuilder: (BuildContext context, int childIdx) {
-                  return Padding(
+                  return InkWell(
+                      onTap: () {
+                        Get.offNamed(RouteHelper.getDetailsOffertRoute(), arguments: listOfOffertsWaiting[childIdx]);
+                      },
+                      child: Padding(
                       padding: const EdgeInsets.only(
                           left: Dimensions.PADDING_SIZE_DEFAULT,
                           right: Dimensions.PADDING_SIZE_DEFAULT),
@@ -347,12 +356,10 @@ class _OffertScreenState extends State<OffertScreen> {
                                           child: RichText(
                                             text: TextSpan(
                                                 text:
-                                                    '${listOfOffertsWaiting[childIdx].buyPrice}' +
-                                                        new String
+                                                    '${listOfOffertsWaiting[childIdx].buyPrice}${String
                                                                 .fromCharCodes(
-                                                            new Runes(
-                                                                '\u0024')) +
-                                                        ' /H',
+                                                            Runes(
+                                                                '\u0024'))} /H',
                                                 style: robotoMedium.copyWith(
                                                     fontSize: Dimensions
                                                         .fontSizeOverSmall,
@@ -360,12 +367,10 @@ class _OffertScreenState extends State<OffertScreen> {
                                                         0xff9a9a9a)),
                                                 children: <TextSpan>[
                                                   TextSpan(
-                                                      text: ' + ${listOfOffertsWaiting[childIdx].bonus}' +
-                                                          new String
+                                                      text: ' + ${listOfOffertsWaiting[childIdx].bonus}${String
                                                                   .fromCharCodes(
-                                                              new Runes(
-                                                                  '\u0024')) +
-                                                          ' /H',
+                                                              Runes(
+                                                                  '\u0024'))} /H',
                                                       style: robotoMedium.copyWith(
                                                           fontSize: Dimensions
                                                               .fontSizeOverSmall,
@@ -397,7 +402,7 @@ class _OffertScreenState extends State<OffertScreen> {
                             ),
                           ],
                         ),
-                      ));
+                      )));
                 },
               )),
         ],
